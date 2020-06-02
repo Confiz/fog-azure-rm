@@ -47,12 +47,12 @@ app_gateway_name = "AG#{time}"
 begin
   resource_group = resource.resource_groups.create(
     name: resource_group_name,
-    location: LOCATION
+    location: Config.location
   )
 
   network.virtual_networks.create(
     name: virtual_network_name,
-    location: LOCATION,
+    location: Config.location,
     resource_group: resource_group_name,
     dns_servers: %w(10.1.0.0 10.2.0.0),
     address_prefixes: %w(10.1.0.0/16 10.2.0.0/16)
@@ -68,7 +68,7 @@ begin
   network.public_ips.create(
     name: public_ip_name,
     resource_group: resource_group_name,
-    location: LOCATION,
+    location: Config.location,
     public_ip_allocation_method: Fog::ARM::Network::Models::IPAllocationMethod::Dynamic
   )
 
@@ -87,7 +87,7 @@ begin
 
   app_gateway = application_gateway.gateways.create(
     name: app_gateway_name,
-    location: LOCATION,
+    location: Config.location,
     resource_group: resource_group_name,
     tags: tags,
     sku_name: 'Standard_Medium',

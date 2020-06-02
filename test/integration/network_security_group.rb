@@ -29,7 +29,7 @@ network = Fog::Network::AzureRM.new(
 begin
   resource_group = rs.resource_groups.create(
     name: 'TestRG-NSG',
-    location: LOCATION
+    location: Config.location
   )
 
   ########################################################################################################################
@@ -46,7 +46,7 @@ begin
   network_security_group = network.network_security_groups.create(
     name: 'testGroup',
     resource_group: 'TestRG-NSG',
-    location: LOCATION,
+    location: Config.location,
     security_rules: [{
       name: 'testRule',
       protocol: Fog::ARM::Network::Models::SecurityRuleProtocol::Tcp,

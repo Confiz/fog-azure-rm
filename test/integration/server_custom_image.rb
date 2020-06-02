@@ -45,14 +45,14 @@ RG_NAME = 'TestRG-CustomVM'.freeze
 begin
   resource_group = rs.resource_groups.create(
     name: RG_NAME,
-    location: LOCATION
+    location: Config.location
   )
 
   storage_account_name = "sa#{current_time}"
 
   storage.storage_accounts.create(
     name: storage_account_name,
-    location: LOCATION,
+    location: Config.location,
     resource_group: RG_NAME,
     account_type: 'Standard',
     replication: 'LRS'
@@ -60,7 +60,7 @@ begin
 
   network.virtual_networks.create(
     name: 'testVnet',
-    location: LOCATION,
+    location: Config.location,
     resource_group: RG_NAME,
     network_address_list: '10.1.0.0/16,10.2.0.0/16'
   )
@@ -75,7 +75,7 @@ begin
   network.network_interfaces.create(
     name: 'NetInt',
     resource_group: RG_NAME,
-    location: LOCATION,
+    location: Config.location,
     subnet_id: "/subscriptions/#{azure_credentials['subscription_id']}/resourceGroups/#{RG_NAME}/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/mysubnet",
     ip_configuration_name: 'testIpConfiguration',
     private_ip_allocation_method: Fog::ARM::Network::Models::IPAllocationMethod::Dynamic
@@ -84,7 +84,7 @@ begin
   network.network_interfaces.create(
     name: 'NetInt2',
     resource_group: RG_NAME,
-    location: LOCATION,
+    location: Config.location,
     subnet_id: "/subscriptions/#{azure_credentials['subscription_id']}/resourceGroups/#{RG_NAME}/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/mysubnet",
     ip_configuration_name: 'testIpConfiguration',
     private_ip_allocation_method: Fog::ARM::Network::Models::IPAllocationMethod::Dynamic
@@ -93,7 +93,7 @@ begin
   network.network_interfaces.create(
     name: 'NetInt3',
     resource_group: RG_NAME,
-    location: LOCATION,
+    location: Config.location,
     subnet_id: "/subscriptions/#{azure_credentials['subscription_id']}/resourceGroups/#{RG_NAME}/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/mysubnet",
     ip_configuration_name: 'testIpConfiguration',
     private_ip_allocation_method: Fog::ARM::Network::Models::IPAllocationMethod::Dynamic
@@ -107,7 +107,7 @@ begin
 
   custom_image_virtual_machine = compute.servers.create(
     name: 'TestVM',
-    location: LOCATION,
+    location: Config.location,
     resource_group: RG_NAME,
     storage_account_name: storage_account_name,
     vm_size: 'Basic_A0',
@@ -127,7 +127,7 @@ begin
 
   custom_image_virtual_machine_managed = compute.servers.create(
     name: 'TestVM-Managed',
-    location: LOCATION,
+    location: Config.location,
     resource_group: RG_NAME,
     storage_account_name: storage_account_name,
     vm_size: 'Basic_A0',
@@ -150,7 +150,7 @@ begin
 
   async_response = compute.servers.create_async(
     name: 'TestVM-ManagedAsync',
-    location: LOCATION,
+    location: Config.location,
     resource_group: RG_NAME,
     storage_account_name: storage_account_name,
     vm_size: 'Basic_A0',

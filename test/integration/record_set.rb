@@ -29,7 +29,7 @@ dns = Fog::DNS::AzureRM.new(
 begin
   resource_group = resource.resource_groups.create(
     name: 'TestRG-RS',
-    location: LOCATION
+    location: Config.location
   )
 
   dns.zones.create(

@@ -32,7 +32,7 @@ Or install it yourself as:
 ## Usage
 
 You can use this gem against the Microsoft Azure Resource Manager Services in the cloud. Of course, to use the Microsoft Azure Resource Manager Services in the cloud, you need to first [create a Microsoft Azure account](http://www.azure.com/en-us/pricing/free-trial/).
-* Set 'LOCATION' constant based on the Azure cloud you are using in [config.rb] (https://github.com/fog/fog-azure-rm/blob/master/lib/fog/azurerm/config.rb) file. By default it will be 'eastus'.
+* Set 'AzureRm::Config.location' based on the Azure cloud you are using in an initializer. By default it will be 'eastus'.
 
 ### Authentication
 

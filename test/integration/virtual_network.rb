@@ -29,7 +29,7 @@ network = Fog::Network::AzureRM.new(
 begin
   resource_group = rs.resource_groups.create(
     name: 'TestRG-VN',
-    location: LOCATION
+    location: Config.location
   )
 
   ########################################################################################################################
@@ -45,7 +45,7 @@ begin
 
   virtual_network = network.virtual_networks.create(
     name:             'testVnet',
-    location:         LOCATION,
+    location:         Config.location,
     resource_group:   resource_group.name,
     subnets:          [{
       name: 'mysubnet',

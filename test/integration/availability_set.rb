@@ -45,7 +45,7 @@ begin
   puts "Create resource group (#{resource_group_name}):"
   resource_group = rs.resource_groups.create(
     name: resource_group_name,
-    location: LOCATION
+    location: Config.location
   )
   puts "Created resource group! [#{resource_group.name}]"
 
@@ -76,7 +76,7 @@ begin
   puts "Create unmanaged default availability set (#{unmanaged_as_name_default}):"
   avail_set = compute.availability_sets.create(
     name: unmanaged_as_name_default,
-    location: LOCATION,
+    location: Config.location,
     resource_group: resource_group_name,
     tags: tags
   )
@@ -92,7 +92,7 @@ begin
   puts "Create unmanaged custom availability set (#{unmanaged_as_name_custom}):"
   avail_set = compute.availability_sets.create(
     name: unmanaged_as_name_custom,
-    location: LOCATION,
+    location: Config.location,
     resource_group: resource_group_name,
     tags: tags,
     platform_fault_domain_count: 3,
@@ -110,7 +110,7 @@ begin
   puts "Create managed default availability set (#{managed_as_name_default}):"
   avail_set = compute.availability_sets.create(
     name: managed_as_name_default,
-    location: LOCATION,
+    location: Config.location,
     resource_group: resource_group_name,
     tags: tags,
     use_managed_disk: true
@@ -127,7 +127,7 @@ begin
   puts "Create managed custom availability set (#{managed_as_name_custom}):"
   avail_set = compute.availability_sets.create(
     name: managed_as_name_custom,
-    location: LOCATION,
+    location: Config.location,
     resource_group: resource_group_name,
     tags: tags,
     platform_fault_domain_count: 2,

@@ -40,12 +40,12 @@ test_container_name = 'disks'
 begin
   resource_group = rs.resource_groups.create(
     name: resource_group_name,
-    location: LOCATION
+    location: Config.location
   )
 
   storage_account = storage.storage_accounts.create(
     name: storage_account_name,
-    location: LOCATION,
+    location: Config.location,
     resource_group: resource_group_name
   )
 

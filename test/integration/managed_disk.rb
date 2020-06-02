@@ -39,7 +39,7 @@ disk_name           = "MD#{time}"
 begin
   rs.resource_groups.create(
     name: resource_group_name,
-    location: LOCATION
+    location: Config.location
   )
 
   ########################################################################################################################
@@ -57,7 +57,7 @@ begin
 
   disk = compute.managed_disks.create(
     name: disk_name,
-    location: LOCATION,
+    location: Config.location,
     resource_group_name: resource_group_name,
     tags: tags,
     account_type: 'Premium_LRS',

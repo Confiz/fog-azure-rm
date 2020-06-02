@@ -41,7 +41,7 @@ premium_storage_acc = "premsa#{time}"
 begin
   resource_group = rs.resource_groups.create(
     name: resource_group_name,
-    location: LOCATION
+    location: Config.location
   )
 
   ########################################################################################################################
@@ -66,7 +66,7 @@ begin
 
   storage_account = storage.storage_accounts.create(
     name: lrs_storage_account,
-    location: LOCATION,
+    location: Config.location,
     resource_group: resource_group_name,
     tags: tags
   )
@@ -78,7 +78,7 @@ begin
 
   storage_account = storage.storage_accounts.create(
     name: grs_storage_account,
-    location: LOCATION,
+    location: Config.location,
     resource_group: resource_group_name,
     sku_name: Fog::ARM::Storage::Models::SkuTier::Standard,
     replication: 'GRS',
@@ -93,7 +93,7 @@ begin
 
   storage_account = storage.storage_accounts.create(
     name: premium_storage_acc,
-    location: LOCATION,
+    location: Config.location,
     resource_group: resource_group_name,
     sku_name: Fog::ARM::Storage::Models::SkuTier::Premium,
     replication: 'LRS',

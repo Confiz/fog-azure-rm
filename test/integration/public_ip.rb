@@ -29,7 +29,7 @@ network = Fog::Network::AzureRM.new(
 begin
   resource_group = rs.resource_groups.create(
     name: 'TestRG-PB',
-    location: LOCATION
+    location: Config.location
   )
 
   ########################################################################################################################
@@ -46,7 +46,7 @@ begin
   public_ip = network.public_ips.create(
     name: 'mypubip',
     resource_group: 'TestRG-PB',
-    location: LOCATION,
+    location: Config.location,
     public_ip_allocation_method: Fog::ARM::Network::Models::IPAllocationMethod::Dynamic,
     tags: { key: 'value' }
   )

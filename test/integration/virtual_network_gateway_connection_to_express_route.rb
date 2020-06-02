@@ -29,12 +29,12 @@ network = Fog::Network::AzureRM.new(
 begin
   resource_group = resource.resource_groups.create(
     name: 'TestRG-GCE',
-    location: LOCATION
+    location: Config.location
   )
 
   network.virtual_networks.create(
     name: 'testVnet',
-    location: LOCATION,
+    location: Config.location,
     resource_group: 'TestRG-GCE',
     network_address_list: '10.1.0.0/16,10.2.0.0/16'
   )
@@ -49,13 +49,13 @@ begin
   network.public_ips.create(
     name: 'mypubip',
     resource_group: 'TestRG-GCE',
-    location: LOCATION,
+    location: Config.location,
     public_ip_allocation_method: Fog::ARM::Network::Models::IPAllocationMethod::Dynamic
   )
 
   network.virtual_network_gateways.create(
     name: 'testnetworkgateway',
-    location: LOCATION,
+    location: Config.location,
     tags: {
       key1: 'value1',
       key2: 'value2'
@@ -86,7 +86,7 @@ begin
 
   connection = network.virtual_network_gateway_connections.create(
     name: 'testnetworkgateway-to-expressroute',
-    location: LOCATION,
+    location: Config.location,
     resource_group: 'TestRG-GCE',
     virtual_network_gateway1: {
       name: 'testnetworkgateway',

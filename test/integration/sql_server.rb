@@ -29,7 +29,7 @@ azure_sql_service = Fog::Sql::AzureRM.new(
 begin
   resource_group = resources.resource_groups.create(
     name: 'TestRG-SQL',
-    location: LOCATION
+    location: Config.location
   )
 
   ########################################################################################################################
@@ -49,7 +49,7 @@ begin
   sql_server = azure_sql_service.sql_servers.create(
     name: server_name,
     resource_group: 'TestRG-SQL',
-    location: LOCATION,
+    location: Config.location,
     tags: tags,
     version: '2.0',
     administrator_login: 'testserveradmin',
@@ -72,7 +72,7 @@ begin
   sql_database = azure_sql_service.sql_databases.create(
     name: database_name,
     resource_group: 'TestRG-SQL',
-    location: LOCATION,
+    location: Config.location,
     tags: tags,
     server_name: server_name
   )

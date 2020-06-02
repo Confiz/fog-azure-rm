@@ -43,14 +43,14 @@ network = Fog::Network::AzureRM.new(
 begin
   resource_group = rs.resource_groups.create(
     name: 'TestRG-VM',
-    location: LOCATION
+    location: Config.location
   )
 
   storage_account_name = "sa#{current_time}"
 
   storage_account = storage.storage_accounts.create(
     name: storage_account_name,
-    location: LOCATION,
+    location: Config.location,
     resource_group: 'TestRG-VM',
     account_type: 'Standard',
     replication: 'LRS'
@@ -58,7 +58,7 @@ begin
 
   network.virtual_networks.create(
     name: 'testVnet',
-    location: LOCATION,
+    location: Config.location,
     resource_group: 'TestRG-VM',
     network_address_list: '10.1.0.0/16,10.2.0.0/16'
   )
@@ -73,7 +73,7 @@ begin
   network.network_interfaces.create(
     name: 'NetInt',
     resource_group: 'TestRG-VM',
-    location: LOCATION,
+    location: Config.location,
     subnet_id: "/subscriptions/#{azure_credentials['subscription_id']}/resourceGroups/TestRG-VM/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/mysubnet",
     ip_configuration_name: 'testIpConfiguration',
     private_ip_allocation_method: Fog::ARM::Network::Models::IPAllocationMethod::Dynamic
@@ -82,7 +82,7 @@ begin
   network.network_interfaces.create(
     name: 'NetInt2',
     resource_group: 'TestRG-VM',
-    location: LOCATION,
+    location: Config.location,
     subnet_id: "/subscriptions/#{azure_credentials['subscription_id']}/resourceGroups/TestRG-VM/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/mysubnet",
     ip_configuration_name: 'testIpConfiguration',
     private_ip_allocation_method: Fog::ARM::Network::Models::IPAllocationMethod::Dynamic
@@ -105,7 +105,7 @@ begin
 
   virtual_machine = compute.servers.create(
     name: 'TestVM',
-    location: LOCATION,
+    location: Config.location,
     resource_group: 'TestRG-VM',
     tags: tags,
     vm_size: 'Basic_A0',
@@ -132,7 +132,7 @@ begin
 
   managed_vm = compute.servers.create(
     name: 'TestVM-Managed',
-    location: LOCATION,
+    location: Config.location,
     resource_group: 'TestRG-VM',
     vm_size: 'Standard_B2s',
     storage_account_name: nil,
@@ -159,7 +159,7 @@ begin
 
   async_response = compute.servers.create_async(
     name: 'TestVM',
-    location: LOCATION,
+    location: Config.location,
     resource_group: 'TestRG-VM',
     tags: tags,
     vm_size: 'Basic_A0',
@@ -228,7 +228,7 @@ begin
 
   managed_disk = compute.managed_disks.create(
     name: 'ManagedDataDisk',
-    location: LOCATION,
+    location: Config.location,
     resource_group_name: 'TestRG-VM',
     account_type: 'Standard_LRS',
     disk_size_gb: 100,

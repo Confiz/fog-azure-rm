@@ -1,21 +1,11 @@
 require 'ms_rest_azure'
 require 'azure/core/http/http_error'
 require 'erb'
-require 'fog/azurerm/config'
 require 'fog/azurerm/constants'
 require 'fog/azurerm/utilities/general'
 require 'fog/azurerm/version'
 require 'fog/core'
 require 'fog/json'
-require 'fog/azurerm/models/compute/caching_types'
-require 'fog/azurerm/models/compute/disk_create_option_types'
-require 'fog/azurerm/models/network/ipallocation_method'
-require 'fog/azurerm/models/network/security_rule_access'
-require 'fog/azurerm/models/network/security_rule_direction'
-require 'fog/azurerm/models/network/security_rule_protocol'
-require 'fog/azurerm/models/storage/sku_name'
-require 'fog/azurerm/models/storage/sku_tier'
-require 'fog/azurerm/models/storage/kind'
 
 module Fog
   # Autoload Module for Credentials
@@ -71,6 +61,7 @@ module Fog
   # Autoload Module for Response::Asynchronous
   module AzureRM
     autoload :AsyncResponse, File.expand_path('azurerm/async_response', __dir__)
+    autoload :Config, File.expand_path('azurerm/config', __dir__)
   end
 
   # Main AzureRM fog Provider Module

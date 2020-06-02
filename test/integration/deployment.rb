@@ -22,7 +22,7 @@ resources = Fog::Resources::AzureRM.new(
 begin
   resource_group = resources.resource_groups.create(
     name: 'TestRG-ZN',
-    location: LOCATION
+    location: Config.location
   )
 
   ########################################################################################################################
