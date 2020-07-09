@@ -40,6 +40,7 @@ module Fog
         def save
           requires :name, :location, :resource_group_name, :creation_data
           requires :disk_size_gb, :account_type
+
           validate_creation_data_params(creation_data)
 
           disk = service.create_or_update_managed_disk(managed_disk_params)
@@ -52,11 +53,21 @@ module Fog
           async ? create_fog_async_response(response) : response
         end
 
+        def creation_data=(new_creation_data)
+          attributes[:creation_data] =
+            if new_creation_data.is_a?(Hash)
+              creation_data = Fog::Compute::AzureRM::CreationData.new
+              creation_data.merge_attributes(new_creation_data)
+            else
+              new_creation_data
+            end
+        end
+
         private
 
         def validate_creation_data_params(creation_data)
-          unless creation_data.key?(:create_option)
-            raise(ArgumentError, ':create_option is required for this operation')
+          if !creation_data || creation_data.create_option.nil?
+            raise(ArgumentError, 'creation_data.create_option is required for this operation')
           end
         end
 
@@ -69,7 +80,7 @@ module Fog
             os_type: os_type,
             disk_size_gb: disk_size_gb,
             tags: tags,
-            creation_data: creation_data,
+            creation_data: creation_data.attributes,
             encryption_settings: encryption_settings
           }
         end
