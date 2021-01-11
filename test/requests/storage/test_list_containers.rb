@@ -13,11 +13,11 @@ class TestListContainers < Minitest::Test
     @blob_client = @service.instance_variable_get(:@blob_client)
 
     @containers = ApiStub::Requests::Storage::Directory.container_list
-    @containers1 = Azure::Service::EnumerationResults.new
+    @containers1 = Azure::Storage::Common::Service::EnumerationResults.new
     @containers1.continuation_token = 'marker'
     @containers1.push(@containers[0])
     @containers1.push(@containers[1])
-    @containers2 = Azure::Service::EnumerationResults.new
+    @containers2 = Azure::Storage::Common::Service::EnumerationResults.new
     @containers2.push(@containers[2])
   end
 
