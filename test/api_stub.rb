@@ -7,6 +7,7 @@ module ApiStub
       autoload :AvailabilitySet, File.expand_path('api_stub/models/compute/availability_set', __dir__)
       autoload :VirtualMachineExtension, File.expand_path('api_stub/models/compute/virtual_machine_extension', __dir__)
       autoload :ManagedDisk, File.expand_path('api_stub/models/compute/managed_disk', __dir__)
+      autoload :Snapshot, File.expand_path('api_stub/models/compute/snapshot', __dir__)
     end
 
     # Load test Resources models
@@ -79,6 +80,7 @@ module ApiStub
       autoload :VirtualMachineExtension, File.expand_path('api_stub/requests/compute/virtual_machine_extension', __dir__)
       autoload :ManagedDisk, File.expand_path('api_stub/requests/compute/managed_disk', __dir__)
       autoload :Image, File.expand_path('api_stub/requests/compute/image', __dir__)
+      autoload :Snapshot, File.expand_path('api_stub/requests/compute/snapshot', __dir__)
     end
 
     # Load test Resources requests

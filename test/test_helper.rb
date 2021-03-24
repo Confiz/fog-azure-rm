@@ -804,6 +804,21 @@ def managed_disk(service)
   )
 end
 
+def snapshot(service)
+  Fog::Compute::AzureRM::Snapshot.new(
+    name: 'snapshot',
+    location: 'East US',
+    resource_group_name: 'fog-test-rg',
+    account_type: 'Premium_LRS',
+    disk_size_gb: 1023,
+    creation_data: {
+      create_option: 'Copy',
+      source_uri: 'source uri on azure'
+    },
+    service: service
+  )
+end
+
 def key_vault(service)
   Fog::KeyVault::AzureRM::Vault.new(
     name: 'key-vault',
