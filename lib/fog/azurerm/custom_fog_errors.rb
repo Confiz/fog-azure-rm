@@ -4,7 +4,12 @@ module Fog
     # This is a custom Fog exception inherited from MsRestAzure::AzureOperationError
     class CustomAzureOperationError < MsRestAzure::AzureOperationError
       def initialize(message, azure_exception)
-        super(azure_exception.request, azure_exception.response, azure_exception.body, "Exception in #{message}")
+        message = "Exception in #{message}"
+        if azure_exception.request.nil? && azure_exception.response.nil? &&
+           azure_exception.body.nil? && !azure_exception.message.nil?
+          message += " #{Fog::JSON.decode(azure_exception.message)['message']}"
+        end
+        super(azure_exception.request, azure_exception.response, azure_exception.body, message)
       end
 
       def print_subscription_limits_information
